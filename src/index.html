@@ -382,8 +382,80 @@
 					</ul>
 				</div>
 			</section>
-
 			<!-- IDEA END -->
+
+			<!-- CONNECT START -->
+			<section class="py-20">
+				<div class="max-w-7xl px-10 mx-auto md:gap-5 gap-6 flex justify-between md:flex-row flex-col">
+					<div class="md:max-w-[525px] max-w-full w-full">
+						<button
+							class="flex items-center gap-2 bg-[#F2F2F7] rounded-lg md:py-2 py-[6px] md:px-4 px-[14px] cursor-pointer md:mb-4 mb-3 md:text-base text-sm">
+							<img src="images/connect/call.svg" alt="thumbs-up" width="16" height="16" />
+							<span>Biz bilan bog’laning</span>
+						</button>
+						<h2 class="lg:text-3xl md:text-2xl text-xl font-semibold text-[#0F172A] tracking-[-75%]">
+							Konsultatsiyaga yoziling va biznesingizni tizimlashtiring
+						</h2>
+					</div>
+
+					<form
+						name="submit-to-google-sheet"
+						class="bg-[linear-gradient(102.43deg,_#FEFEFE_16.88%,_#F9F9F9_104.88%)] rounded-3xl border border-[#E2E8F0] md:max-w-[568px] max-w-full w-full p-6 grid gap-8">
+						<div class="grid gap-6">
+							<div>
+								<label class="block mb-2 text-[#1e1e1e]" for="ism">Ism</label>
+								<input
+									class="placeholder:text-[#B3B3B3] placeholder:text-base border border-[#D9D9D9] py-3 px-4 w-full rounded-lg"
+									type="text"
+									placeholder="To’liq ismingiz"
+									id="ism"
+									name="firstname" />
+							</div>
+
+							<div>
+								<label class="block mb-2 text-[#1e1e1e]" for="phone">Telefon raqam</label>
+								<input
+									class="placeholder:text-[#B3B3B3] placeholder:text-base border border-[#D9D9D9] py-3 px-4 w-full rounded-lg"
+									type="number"
+									placeholder="+998 _ _  _ _ _  _ _  _ _"
+									id="phone"
+									name="phone" />
+							</div>
+
+							<div>
+								<label class="block mb-2 text-[#1e1e1e]" for="comp">Kompaniyangiz</label>
+								<input
+									class="placeholder:text-[#B3B3B3] placeholder:text-base border border-[#D9D9D9] py-3 px-4 w-full rounded-lg"
+									type="text"
+									placeholder="Kompaniyangiz nomi"
+									id="comp"
+									name="company" />
+							</div>
+						</div>
+						<button
+							class="bg-[#0F172A] text-white py-2 md:px-4 px-3 rounded-lg cursor-pointer font-medium md:text-sm text-xs border hover:border border-[#0F172A] hover:text-[#0F172A] hover:bg-transparent duration-300 ease-in">
+							Konsultatsiyaga yozilish
+						</button>
+					</form>
+				</div>
+			</section>
+			<!-- CONNECT END -->
 		</main>
+
+		<script>
+			const scriptURL =
+				'https://script.google.com/macros/s/AKfycbwZCLQp1RT4dgtvsxWXGVyhh_VpFJokDkpIeLiD04xlinXXqJ0isTNo0rt41GyQxXk_5w/exec';
+			const form = document.forms['submit-to-google-sheet'];
+
+			form.addEventListener('submit', e => {
+				e.preventDefault();
+				fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+					.then(response => {
+						alert("Siz bilan tez orada bog'lanamiz!");
+						form.reset(); // forma tozalanadi
+					})
+					.catch(error => console.error('Error!', error.message));
+			});
+		</script>
 	</body>
 </html>
